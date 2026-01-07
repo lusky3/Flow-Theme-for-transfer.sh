@@ -221,7 +221,7 @@ export function UploadZone() {
               key={file.id}
               className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg"
             >
-              <FileIcon className="w-5 h-5 text-gray-400 flex-shrink-0" aria-hidden="true" />
+              <FileIcon className="w-5 h-5 text-gray-400 shrink-0" aria-hidden="true" />
 
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2">
@@ -240,9 +240,7 @@ export function UploadZone() {
                   ) : (
                     <span className="font-medium truncate">{file.name}</span>
                   )}
-                  <span className="text-xs text-gray-500 flex-shrink-0">
-                    {formatBytes(file.size)}
-                  </span>
+                  <span className="text-xs text-gray-500 shrink-0">{formatBytes(file.size)}</span>
                 </div>
 
                 {file.status === 'uploading' && (
@@ -269,7 +267,7 @@ export function UploadZone() {
                 )}
               </div>
 
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 {file.status === 'uploading' && (
                   <Loader2 className="w-5 h-5 text-primary-500 animate-spin" aria-hidden="true" />
                 )}

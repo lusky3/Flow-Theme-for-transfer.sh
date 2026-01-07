@@ -105,14 +105,14 @@ This creates `bindata_gen.go` which embeds the dist files into the Go binary.
 
 The frontend uses Go template variables passed via `window.__CONFIG__`:
 
-| Variable | Description |
-|----------|-------------|
-| `{{.WebAddress}}` | Base URL (e.g., `https://transfer.sh/`) |
-| `{{.Hostname}}` | Server hostname |
-| `{{.GAKey}}` | Google Analytics key (optional) |
-| `{{.EmailContact}}` | Contact email (optional) |
-| `{{.MaxUploadSize}}` | Upload size limit (optional) |
-| `{{.PurgeTime}}` | File retention period (optional) |
+| Variable              | Description                              |
+| --------------------- | ---------------------------------------- |
+| `{{.WebAddress}}`     | Base URL (e.g., `https://transfer.sh/`)  |
+| `{{.Hostname}}`       | Server hostname                          |
+| `{{.GAKey}}`          | Google Analytics key (optional)          |
+| `{{.EmailContact}}`   | Contact email (optional)                 |
+| `{{.MaxUploadSize}}`  | Upload size limit (optional)             |
+| `{{.PurgeTime}}`      | File retention period (optional)         |
 
 ## Build Output
 
