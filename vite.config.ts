@@ -1,9 +1,10 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
-import { resolve } from 'path'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
+import { codecovRollupPlugin } from '@codecov/rollup-plugin';
+import { resolve } from 'path';
 
-const __dirname = import.meta.dirname
+const __dirname = import.meta.dirname;
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
@@ -33,13 +34,20 @@ export default defineConfig({
       output: {
         assetFileNames: (assetInfo) => {
           if (assetInfo.name?.endsWith('.css')) {
-            return 'styles/[name]-[hash][extname]'
+            return 'styles/[name]-[hash][extname]';
           }
-          return 'scripts/[name]-[hash][extname]'
+          return 'scripts/[name]-[hash][extname]';
         },
         chunkFileNames: 'scripts/[name]-[hash].js',
         entryFileNames: 'scripts/[name]-[hash].js',
       },
+      plugins: [
+        codecovRollupPlugin({
+          enableBundleAnalysis: process.env.CODECOV_TOKEN !== undefined,
+          bundleName: 'transfer.sh-web',
+          uploadToken: process.env.CODECOV_TOKEN,
+        }),
+      ],
     },
   },
-})
+});
