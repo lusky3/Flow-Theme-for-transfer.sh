@@ -88,6 +88,114 @@ function createFileUploader(
   });
 }
 
+interface FileItemProps {
+  readonly file: UploadedFile;
+  readonly onRemove: (id: string) => void;
+}
+
+function FileItem({ file, onRemove }: FileItemProps) {
+  return (
+    <li className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg">
+      <FileIcon className="w-5 h-5 text-gray-400 shrink-0" aria-hidden="true" />
+
+      <div className="flex-1 min-w-0">
+        <div className="flex items-center gap-2">
+          {file.status === 'complete' && file.url ? (
+            <>
+              <a
+                href={file.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium truncate text-primary-600 dark:text-primary-400 hover:underline"
+              >
+                {file.name}
+              </a>
+              <CopyButton text={file.url} label="link" className="text-gray-400" />
+            </>
+          ) : (
+            <span className="font-medium truncate">{file.name}</span>
+          )}
+          <span className="text-xs text-gray-500 shrink-0">{formatBytes(file.size)}</span>
+        </div>
+
+        {file.status === 'uploading' && (
+          <progress
+            className="mt-1 h-1.5 w-full rounded-full overflow-hidden [&::-webkit-progress-bar]:bg-gray-200 dark:[&::-webkit-progress-bar]:bg-gray-700 [&::-webkit-progress-value]:bg-primary-500 [&::-moz-progress-bar]:bg-primary-500"
+            value={file.progress}
+            max={100}
+            aria-label={`Upload progress: ${file.progress}%`}
+          />
+        )}
+
+        {file.status === 'complete' && file.deletionToken && (
+          <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
+            Deletion token:{' '}
+            <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">{file.deletionToken}</code>
+            <CopyButton text={file.deletionToken} label="deletion token" />
+          </p>
+        )}
+
+        {file.status === 'error' && <p className="text-xs text-red-500 mt-1">{file.error}</p>}
+      </div>
+
+      <div className="shrink-0">
+        {file.status === 'uploading' && (
+          <Loader2 className="w-5 h-5 text-primary-500 animate-spin" aria-hidden="true" />
+        )}
+        {file.status === 'complete' && (
+          <CheckCircle className="w-5 h-5 text-green-500" aria-hidden="true" />
+        )}
+        {file.status === 'error' && (
+          <AlertCircle className="w-5 h-5 text-red-500" aria-hidden="true" />
+        )}
+      </div>
+
+      <button
+        onClick={() => onRemove(file.id)}
+        aria-label="Remove file"
+        className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+      >
+        <X className="w-4 h-4" />
+      </button>
+    </li>
+  );
+}
+
+interface FileListProps {
+  readonly files: UploadedFile[];
+  readonly onRemove: (id: string) => void;
+  readonly downloadAllBase: string | null;
+}
+
+function FileList({ files, onRemove, downloadAllBase }: FileListProps) {
+  return (
+    <ul className="space-y-2 list-none" aria-label="Uploaded files">
+      <div className="sr-only" aria-live="polite" aria-atomic="true">
+        {files.some((f) => f.status === 'uploading') &&
+          `Uploading ${files.filter((f) => f.status === 'uploading').length} file(s)`}
+        {files.some((f) => f.status === 'complete') &&
+          `${files.filter((f) => f.status === 'complete').length} file(s) uploaded successfully`}
+        {files.some((f) => f.status === 'error') &&
+          `${files.filter((f) => f.status === 'error').length} file(s) failed to upload`}
+      </div>
+      {files.map((file) => (
+        <FileItem key={file.id} file={file} onRemove={onRemove} />
+      ))}
+
+      {downloadAllBase && (
+        <li className="flex gap-2 pt-2 list-none">
+          <a href={`${downloadAllBase}.zip`} className="btn btn-secondary text-sm">
+            Download all as ZIP
+          </a>
+          <a href={`${downloadAllBase}.tar.gz`} className="btn btn-secondary text-sm">
+            Download all as TAR.GZ
+          </a>
+        </li>
+      )}
+    </ul>
+  );
+}
+
 export function UploadZone() {
   const [isDragging, setIsDragging] = useState(false);
   const [files, setFiles] = useState<UploadedFile[]>([]);
@@ -207,99 +315,7 @@ export function UploadZone() {
       </button>
 
       {files.length > 0 && (
-        <ul className="space-y-2 list-none" aria-label="Uploaded files">
-          <div className="sr-only" aria-live="polite" aria-atomic="true">
-            {files.some((f) => f.status === 'uploading') &&
-              `Uploading ${files.filter((f) => f.status === 'uploading').length} file(s)`}
-            {files.some((f) => f.status === 'complete') &&
-              `${files.filter((f) => f.status === 'complete').length} file(s) uploaded successfully`}
-            {files.some((f) => f.status === 'error') &&
-              `${files.filter((f) => f.status === 'error').length} file(s) failed to upload`}
-          </div>
-          {files.map((file) => (
-            <li
-              key={file.id}
-              className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-900 rounded-lg"
-            >
-              <FileIcon className="w-5 h-5 text-gray-400 shrink-0" aria-hidden="true" />
-
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  {file.status === 'complete' && file.url ? (
-                    <>
-                      <a
-                        href={file.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-medium truncate text-primary-600 dark:text-primary-400 hover:underline"
-                      >
-                        {file.name}
-                      </a>
-                      <CopyButton text={file.url} label="link" className="text-gray-400" />
-                    </>
-                  ) : (
-                    <span className="font-medium truncate">{file.name}</span>
-                  )}
-                  <span className="text-xs text-gray-500 shrink-0">{formatBytes(file.size)}</span>
-                </div>
-
-                {file.status === 'uploading' && (
-                  <progress
-                    className="mt-1 h-1.5 w-full rounded-full overflow-hidden [&::-webkit-progress-bar]:bg-gray-200 dark:[&::-webkit-progress-bar]:bg-gray-700 [&::-webkit-progress-value]:bg-primary-500 [&::-moz-progress-bar]:bg-primary-500"
-                    value={file.progress}
-                    max={100}
-                    aria-label={`Upload progress: ${file.progress}%`}
-                  />
-                )}
-
-                {file.status === 'complete' && file.deletionToken && (
-                  <p className="text-xs text-gray-500 mt-1 flex items-center gap-1">
-                    Deletion token:{' '}
-                    <code className="bg-gray-200 dark:bg-gray-800 px-1 rounded">
-                      {file.deletionToken}
-                    </code>
-                    <CopyButton text={file.deletionToken} label="deletion token" />
-                  </p>
-                )}
-
-                {file.status === 'error' && (
-                  <p className="text-xs text-red-500 mt-1">{file.error}</p>
-                )}
-              </div>
-
-              <div className="shrink-0">
-                {file.status === 'uploading' && (
-                  <Loader2 className="w-5 h-5 text-primary-500 animate-spin" aria-hidden="true" />
-                )}
-                {file.status === 'complete' && (
-                  <CheckCircle className="w-5 h-5 text-green-500" aria-hidden="true" />
-                )}
-                {file.status === 'error' && (
-                  <AlertCircle className="w-5 h-5 text-red-500" aria-hidden="true" />
-                )}
-              </div>
-
-              <button
-                onClick={() => removeFile(file.id)}
-                aria-label="Remove file"
-                className="p-1 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </li>
-          ))}
-
-          {downloadAllBase && (
-            <li className="flex gap-2 pt-2 list-none">
-              <a href={`${downloadAllBase}.zip`} className="btn btn-secondary text-sm">
-                Download all as ZIP
-              </a>
-              <a href={`${downloadAllBase}.tar.gz`} className="btn btn-secondary text-sm">
-                Download all as TAR.GZ
-              </a>
-            </li>
-          )}
-        </ul>
+        <FileList files={files} onRemove={removeFile} downloadAllBase={downloadAllBase} />
       )}
     </div>
   );
