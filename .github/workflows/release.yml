@@ -28,6 +28,8 @@ jobs:
 
       - name: Build
         run: npm run build
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Create release archive
         run: tar -czvf dist.tar.gz dist/
