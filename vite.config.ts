@@ -2,7 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { codecovRollupPlugin } from '@codecov/rollup-plugin';
-import { resolve } from 'path';
+import { resolve } from 'node:path';
 
 const __dirname = import.meta.dirname;
 
@@ -33,7 +33,8 @@ export default defineConfig({
       },
       output: {
         assetFileNames: (assetInfo) => {
-          if (assetInfo.name?.endsWith('.css')) {
+          const name = assetInfo.names?.[0];
+          if (name?.endsWith('.css')) {
             return 'styles/[name]-[hash][extname]';
           }
           return 'scripts/[name]-[hash][extname]';
