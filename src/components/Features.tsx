@@ -31,7 +31,7 @@ export function Features() {
     {
       icon: HardDrive,
       title: config.maxUploadSize ? `Upload up to ${config.maxUploadSize}` : 'Unlimited uploads',
-      description: 'No file size restrictions',
+      description: config.maxUploadSize ? 'Per file upload limit' : 'No file size restrictions',
     },
     {
       icon: Clock,

@@ -55,22 +55,66 @@ export function DownloadPage() {
   };
 
   const renderPreview = () => {
-    switch (config.previewType) {
-      case 'image':
-        return <ImagePreview url={config.downloadUrl} filename={config.filename} />;
-      case 'video':
-        return <VideoPreview url={config.downloadUrl} contentType={config.contentType} />;
-      case 'audio':
-        return <AudioPreview url={config.downloadUrl} filename={config.filename} />;
-      case 'code':
-        return <CodePreview url={config.downloadUrl} filename={config.filename} />;
-      case 'markdown':
-        return <MarkdownPreview url={config.downloadUrl} />;
-      case 'sandbox':
-        return <GenericPreview filename={config.filename} contentType={config.contentType} />;
-      default:
-        return <GenericPreview filename={config.filename} contentType={config.contentType} />;
+    const previewComponents = {
+      image: <ImagePreview url={config.downloadUrl} filename={config.filename} />,
+      video: <VideoPreview url={config.downloadUrl} contentType={config.contentType} />,
+      audio: <AudioPreview url={config.downloadUrl} filename={config.filename} />,
+      code: <CodePreview url={config.downloadUrl} filename={config.filename} />,
+      markdown: <MarkdownPreview url={config.downloadUrl} />,
+      sandbox: <GenericPreview filename={config.filename} contentType={config.contentType} />,
+    };
+
+    return (
+      previewComponents[config.previewType as keyof typeof previewComponents] || (
+        <GenericPreview filename={config.filename} contentType={config.contentType} />
+      )
+    );
+  };
+
+  const renderDeleteModalContent = () => {
+    if (deleteStatus === 'success') {
+      return (
+        <div className="text-center py-4">
+          <Check className="w-12 h-12 mx-auto mb-2 text-green-500" />
+          <p>File deleted successfully</p>
+        </div>
+      );
     }
+
+    return (
+      <>
+        <p className="text-gray-600 dark:text-gray-400 mb-4">
+          Enter the deletion token to permanently delete this file.
+        </p>
+
+        <input
+          type="text"
+          value={deletionToken}
+          onChange={(e) => setDeletionToken(e.target.value)}
+          placeholder="Deletion token"
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 mb-4"
+        />
+
+        {deleteStatus === 'error' && (
+          <p className="text-red-500 text-sm mb-4">
+            Failed to delete file. Please check your deletion token.
+          </p>
+        )}
+
+        <div className="flex gap-3 justify-end">
+          <button onClick={() => setShowDeleteModal(false)} className="btn btn-ghost">
+            Cancel
+          </button>
+          <button
+            onClick={handleDelete}
+            disabled={!deletionToken || deleteStatus === 'loading'}
+            className="btn bg-red-600 text-white hover:bg-red-700"
+          >
+            {deleteStatus === 'loading' ? 'Deleting...' : 'Delete'}
+          </button>
+        </div>
+      </>
+    );
   };
 
   return (
@@ -119,46 +163,7 @@ export function DownloadPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50">
           <div className="bg-white dark:bg-gray-900 rounded-xl p-6 max-w-md w-full shadow-xl">
             <h2 className="text-xl font-semibold mb-4">Delete File</h2>
-
-            {deleteStatus === 'success' ? (
-              <div className="text-center py-4">
-                <Check className="w-12 h-12 mx-auto mb-2 text-green-500" />
-                <p>File deleted successfully</p>
-              </div>
-            ) : (
-              <>
-                <p className="text-gray-600 dark:text-gray-400 mb-4">
-                  Enter the deletion token to permanently delete this file.
-                </p>
-
-                <input
-                  type="text"
-                  value={deletionToken}
-                  onChange={(e) => setDeletionToken(e.target.value)}
-                  placeholder="Deletion token"
-                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 mb-4"
-                />
-
-                {deleteStatus === 'error' && (
-                  <p className="text-red-500 text-sm mb-4">
-                    Failed to delete file. Please check your deletion token.
-                  </p>
-                )}
-
-                <div className="flex gap-3 justify-end">
-                  <button onClick={() => setShowDeleteModal(false)} className="btn btn-ghost">
-                    Cancel
-                  </button>
-                  <button
-                    onClick={handleDelete}
-                    disabled={!deletionToken || deleteStatus === 'loading'}
-                    className="btn bg-red-600 text-white hover:bg-red-700"
-                  >
-                    {deleteStatus === 'loading' ? 'Deleting...' : 'Delete'}
-                  </button>
-                </div>
-              </>
-            )}
+            {renderDeleteModalContent()}
           </div>
         </div>
       )}
