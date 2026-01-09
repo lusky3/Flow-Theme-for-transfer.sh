@@ -1,0 +1,20 @@
+{
+  "name": "flow-pages",
+  "version": "1.0.0",
+  "description": "GitHub Pages site for TransferFlow",
+  "type": "module",
+  "scripts": {
+    "test": "node --test script.test.js",
+    "serve": "python3 -m http.server 8000",
+    "validate": "node validate.js"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1"
+  },
+  "keywords": [
+    "transfer.sh",
+    "file-sharing",
+    "github-pages"
+  ],
+  "license": "MIT"
+}

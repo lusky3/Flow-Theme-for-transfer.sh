@@ -22,6 +22,7 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/index.html'),
+        'main-demo': resolve(__dirname, 'src/index.demo.html'),
         download: resolve(__dirname, 'src/download.html'),
         'download-image': resolve(__dirname, 'src/download-image.html'),
         'download-video': resolve(__dirname, 'src/download-video.html'),
@@ -29,6 +30,9 @@ export default defineConfig({
         'download-markdown': resolve(__dirname, 'src/download-markdown.html'),
         'download-code': resolve(__dirname, 'src/download-code.html'),
         'download-sandbox': resolve(__dirname, 'src/download.sandbox.html'),
+        'download-image-demo': resolve(__dirname, 'src/download-image.demo.html'),
+        'download-code-demo': resolve(__dirname, 'src/download-code.demo.html'),
+        'download-markdown-demo': resolve(__dirname, 'src/download-markdown.demo.html'),
         '404': resolve(__dirname, 'src/404.html'),
       },
       output: {

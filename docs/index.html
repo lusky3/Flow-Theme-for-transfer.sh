@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Flow - A modern, beautiful web interface for transfer.sh file sharing">
+  <title>Flow - Modern transfer.sh Web Interface</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav-content">
+        <div class="logo">
+          <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+          <span class="logo-text">Flow</span>
+        </div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#screenshots">Screenshots</a>
+          <a href="#download">Download</a>
+          <a href="https://github.com/lusky3/transfer.sh-web" target="_blank" rel="noopener">GitHub</a>
+        </div>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+          <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <div class="badge">Modern Web Interface for transfer.sh</div>
+        <h1 class="hero-title">
+          File Sharing,<br>
+          <span class="gradient-text">Beautifully Simplified</span>
+        </h1>
+        <p class="hero-description">
+          Flow brings a stunning, modern interface to transfer.sh - the beloved command-line file sharing service. 
+          Upload files with drag-and-drop, preview content, and share instantly.
+        </p>
+        <div class="hero-actions">
+          <a href="#download" class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="7 10 12 15 17 10"></polyline>
+              <line x1="12" y1="15" x2="12" y2="3"></line>
+            </svg>
+            Download Latest
+          </a>
+          <a href="#screenshots" class="btn btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+            View Screenshots
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat">
+            <div class="stat-value" id="github-stars">Loading...</div>
+            <div class="stat-label">GitHub Stars</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value" id="latest-version">Loading...</div>
+            <div class="stat-label">Latest Version</div>
+          </div>
+          <div class="stat">
+            <div class="stat-value">MIT</div>
+            <div class="stat-label">License</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Powerful Features</h2>
+        <p class="section-description">Everything you need for seamless file sharing</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+          </div>
+          <h3 class="feature-title">Drag & Drop Upload</h3>
+          <p class="feature-description">Simply drag files into the browser for instant uploads with real-time progress tracking</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <circle cx="8.5" cy="8.5" r="1.5"></circle>
+              <polyline points="21 15 16 10 5 21"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title">Rich Previews</h3>
+          <p class="feature-description">Preview images, videos, audio, code with syntax highlighting, and rendered markdown</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"></circle>
+              <path d="M12 6v6l4 2"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Dark Mode</h3>
+          <p class="feature-description">Beautiful dark, light, and system themes with smooth transitions</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Mobile Responsive</h3>
+          <p class="feature-description">Fully responsive design that works perfectly on all devices and screen sizes</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3 class="feature-title">CLI Integration</h3>
+          <p class="feature-description">Seamless integration with transfer.sh CLI tools and shell functions</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+            </svg>
+          </div>
+          <h3 class="feature-title">Secure & Fast</h3>
+          <p class="feature-description">Built with React 19, Vite 7, and TypeScript for maximum performance and security</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots Section -->
+  <section id="screenshots" class="screenshots">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Screenshots</h2>
+        <p class="section-description">Experience the beautiful interface across devices and themes</p>
+      </div>
+      
+      <!-- Desktop Screenshots -->
+      <div class="screenshot-category">
+        <h3 class="screenshot-category-title">Desktop View</h3>
+        <div class="screenshot-grid">
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-light.png" alt="Desktop Light Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Light Mode</p>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-dark.png" alt="Desktop Dark Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Dark Mode</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full Page Screenshots -->
+      <div class="screenshot-category">
+        <h3 class="screenshot-category-title">Full Page</h3>
+        <div class="screenshot-grid">
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-full-light.png" alt="Full Page Light Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Complete Interface - Light</p>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-full-dark.png" alt="Full Page Dark Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Complete Interface - Dark</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Screenshots -->
+      <div class="screenshot-category">
+        <h3 class="screenshot-category-title">Mobile View</h3>
+        <div class="screenshot-grid mobile">
+          <div class="screenshot-item">
+            <div class="screenshot-frame mobile">
+              <img src="screenshots/screenshot-mobile-light.png" alt="Mobile Light Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Mobile - Light</p>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame mobile">
+              <img src="screenshots/screenshot-mobile-dark.png" alt="Mobile Dark Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Mobile - Dark</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Pages Screenshots -->
+      <div class="screenshot-category">
+        <h3 class="screenshot-category-title">File Preview Pages</h3>
+        <div class="screenshot-grid">
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-preview-image-light.png" alt="Preview Light Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Image Preview - Light</p>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-preview-image-dark.png" alt="Preview Dark Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Image Preview - Dark</p>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-preview-code-light.png" alt="Code Preview Light Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Code Preview - Light</p>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-preview-code-dark.png" alt="Code Preview Dark Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Code Preview - Dark</p>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-preview-markdown-light.png" alt="Markdown Preview Light Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Markdown Preview - Light</p>
+          </div>
+          <div class="screenshot-item">
+            <div class="screenshot-frame">
+              <img src="screenshots/screenshot-preview-markdown-dark.png" alt="Markdown Preview Dark Mode" loading="lazy">
+            </div>
+            <p class="screenshot-label">Markdown Preview - Dark</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Section -->
+  <section class="tech-stack">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Modern Tech Stack</h2>
+        <p class="section-description">Built with cutting-edge technologies</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-item">
+          <div class="tech-logo">⚛️</div>
+          <div class="tech-name">React 19</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">⚡</div>
+          <div class="tech-name">Vite 7</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">🎨</div>
+          <div class="tech-name">Tailwind CSS 4</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">📘</div>
+          <div class="tech-name">TypeScript 5</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">🧪</div>
+          <div class="tech-name">Vitest</div>
+        </div>
+        <div class="tech-item">
+          <div class="tech-logo">🐹</div>
+          <div class="tech-name">Go Embed</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section id="download" class="download">
+    <div class="container">
+      <div class="download-content">
+        <h2 class="download-title">Ready to Get Started?</h2>
+        <p class="download-description">Download the latest release or deploy with Docker</p>
+        <div class="download-options">
+          <a href="https://github.com/lusky3/transfer.sh-web/releases/latest" class="download-card" target="_blank" rel="noopener">
+            <div class="download-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+            </div>
+            <h3>Download Release</h3>
+            <p>Get the latest stable version</p>
+          </a>
+          <a href="https://github.com/dutchcoders/transfer.sh" class="download-card" target="_blank" rel="noopener">
+            <div class="download-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <polyline points="12 6 12 12 16 14"></polyline>
+              </svg>
+            </div>
+            <h3>Get transfer.sh</h3>
+            <p>Download the backend server</p>
+          </a>
+        </div>
+        <div class="code-example">
+          <div class="code-header">
+            <span>Quick Start with Docker</span>
+            <button class="copy-btn" data-copy="docker">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+            </button>
+          </div>
+          <pre><code id="docker-code"># Clone and build
+git clone https://github.com/lusky3/transfer.sh-web.git
+cd transfer.sh-web
+npm install && npm run build
+
+# Run with Docker Compose
+docker compose up</code></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <div class="logo">
+            <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <span class="logo-text">Flow</span>
+          </div>
+          <p class="footer-tagline">The Flow theme for transfer.sh</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-column">
+            <h4>Project</h4>
+            <a href="https://github.com/lusky3/transfer.sh-web">GitHub</a>
+            <a href="https://github.com/lusky3/transfer.sh-web/releases">Releases</a>
+            <a href="https://github.com/lusky3/transfer.sh-web/issues">Issues</a>
+          </div>
+          <div class="footer-column">
+            <h4>Resources</h4>
+            <a href="https://github.com/dutchcoders/transfer.sh">transfer.sh</a>
+            <a href="https://github.com/lusky3/transfer.sh-web#readme">Documentation</a>
+            <a href="https://github.com/lusky3/transfer.sh-web/blob/main/LICENSE">License</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Flow. Released under MIT License.</p>
+        <div class="footer-badges">
+          <img src="https://img.shields.io/github/stars/lusky3/transfer.sh-web?style=social" alt="GitHub stars">
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

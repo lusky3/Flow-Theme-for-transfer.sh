@@ -1,0 +1,8 @@
+# Snyk (https://snyk.io) policy file
+
+# Ignore HTTP usage in local development scripts
+ignore:
+  'SNYK-JS-HTTP-6717673':
+    - 'scripts/generate-screenshots.js':
+        reason: 'Local-only temporary server for screenshot generation, not exposed to network'
+        expires: '2099-12-31T23:59:59.999Z'

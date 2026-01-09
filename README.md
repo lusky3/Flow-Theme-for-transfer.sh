@@ -17,11 +17,15 @@
 
 Modern web frontend for [transfer.sh](https://github.com/dutchcoders/transfer.sh/) - easy file sharing from the command line.
 
+**🌐 [View Live Demo - Flow Theme](https://lusky3.github.io/transfer.sh-web/)**
+
+> **Flow** is the modern, beautiful GitHub Pages theme included with this project. See `docs/` for the showcase site.
+
 ## Screenshots
 
-![Home Light](screenshots/home-light.png)
+![Home Light](docs/screenshots/screenshot-light.png)
 
-![Home Dark](screenshots/home-dark.png)
+![Home Dark](docs/screenshots/screenshot-dark.png)
 
 ## Features
 

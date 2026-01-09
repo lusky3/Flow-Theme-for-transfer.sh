@@ -1,0 +1,2 @@
+# Exclude development scripts from Snyk Code scanning
+scripts/

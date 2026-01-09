@@ -41,6 +41,24 @@ export default tseslint.config(
     },
   },
   {
+    files: ['scripts/**/*.js'],
+    plugins: {
+      prettier,
+    },
+    languageOptions: {
+      ecmaVersion: 2022,
+      sourceType: 'module',
+      globals: {
+        console: 'readonly',
+        process: 'readonly',
+      },
+    },
+    rules: {
+      'no-console': 'off',
+      'prettier/prettier': 'error',
+    },
+  },
+  {
     ignores: ['dist/', 'node_modules/', 'coverage/', '*.config.js', '*.config.ts'],
   }
 );
