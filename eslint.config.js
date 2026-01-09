@@ -41,7 +41,7 @@ export default tseslint.config(
     },
   },
   {
-    files: ['scripts/**/*.js'],
+    files: ['scripts/**/*.js', 'docs/**/*.js'],
     plugins: {
       prettier,
     },
