@@ -106,8 +106,11 @@ function validateAccessibility(html) {
 function validatePerformance(html) {
   console.log('Checking performance...');
   
-  // Check for preconnect
-  if (html.includes('fonts.googleapis.com') && !html.includes('rel="preconnect"')) {
+  // Check for preconnect - properly validate Google Fonts URLs
+  const googleFontsLinkRegex = /<link[^>]+href=["']https:\/\/fonts\.googleapis\.com[^"']*["'][^>]*>/i;
+  const preconnectRegex = /<link[^>]+rel=["']preconnect["'][^>]+href=["']https:\/\/fonts\.googleapis\.com["'][^>]*>/i;
+  
+  if (googleFontsLinkRegex.test(html) && !preconnectRegex.test(html)) {
     warnings.push('Consider adding preconnect for Google Fonts');
   }
   
