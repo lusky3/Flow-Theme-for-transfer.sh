@@ -117,7 +117,7 @@ function validatePerformance(html) {
   }
   
   // Check script loading
-  const scriptMatches = html.match(/<script[^>]*>/g) || [];
+  const scriptMatches = html.match(/<script[^>]*>/gi) || [];
   scriptMatches.forEach(script => {
     if (!script.includes('defer') && !script.includes('async') && !script.includes('type="module"')) {
       warnings.push('Script without defer/async may block rendering');
