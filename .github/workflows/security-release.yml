@@ -1,0 +1,54 @@
+name: Security Release
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  security-release:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.pull_request.merged == true &&
+      github.actor == 'dependabot[bot]'
+    steps:
+      - name: Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if security update
+        id: check-security
+        run: |
+          if [ "${{ steps.metadata.outputs.alert-state }}" != "" ]; then
+            echo "is_security=true" >> $GITHUB_OUTPUT
+            echo "Security update detected: ${{ steps.metadata.outputs.alert-state }}"
+          fi
+
+      - uses: actions/checkout@v6
+        if: steps.check-security.outputs.is_security == 'true'
+        with:
+          fetch-depth: 0
+
+      - name: Get current version
+        if: steps.check-security.outputs.is_security == 'true'
+        id: version
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          echo "current=$LATEST_TAG" >> $GITHUB_OUTPUT
+          # Bump patch version
+          NEW_VERSION=$(echo $LATEST_TAG | awk -F. '{$NF = $NF + 1;} 1' | sed 's/ /./g')
+          echo "new=$NEW_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Create security release
+        if: steps.check-security.outputs.is_security == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag -a "${{ steps.version.outputs.new }}" -m "Security update: ${{ steps.metadata.outputs.dependency-names }}"
+          git push origin "${{ steps.version.outputs.new }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
