@@ -7,6 +7,9 @@ on:
     workflows: [CI, Security, Deploy]
     types: [completed]
 
+permissions:
+  contents: read
+
 jobs:
   notify-pr:
     if: github.event_name == 'pull_request'
