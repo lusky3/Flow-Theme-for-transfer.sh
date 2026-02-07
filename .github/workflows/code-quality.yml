@@ -1,0 +1,124 @@
+name: Code Quality
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  codecov:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Check for Codecov token
+        id: check-codecov
+        run: |
+          if [ -z "${{ secrets.CODECOV_TOKEN }}" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/checkout@v6
+        if: steps.check-codecov.outputs.skip != 'true'
+
+      - uses: actions/setup-node@v6
+        if: steps.check-codecov.outputs.skip != 'true'
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.check-codecov.outputs.skip != 'true'
+        run: npm ci --ignore-scripts
+
+      - name: Run tests with coverage
+        if: steps.check-codecov.outputs.skip != 'true'
+        run: npm run test:ci
+
+      - name: Upload coverage to Codecov
+        if: steps.check-codecov.outputs.skip != 'true'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info
+
+      - name: Upload test results to Codecov
+        if: steps.check-codecov.outputs.skip != 'true' && !cancelled()
+        uses: codecov/test-results-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: test-results.xml
+
+  qlty:
+    name: Qlty Coverage
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Check for Qlty token
+        id: check-qlty
+        run: |
+          if [ -z "${{ secrets.QLTY_COVERAGE_TOKEN }}" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/checkout@v6
+        if: steps.check-qlty.outputs.skip != 'true'
+
+      - uses: actions/setup-node@v6
+        if: steps.check-qlty.outputs.skip != 'true'
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.check-qlty.outputs.skip != 'true'
+        run: npm ci --ignore-scripts
+
+      - name: Run tests with coverage
+        if: steps.check-qlty.outputs.skip != 'true'
+        run: npm run test:ci
+
+      - name: Upload coverage to Qlty
+        if: steps.check-qlty.outputs.skip != 'true'
+        uses: qltysh/qlty-action/coverage@v2
+        with:
+          token: ${{ secrets.QLTY_COVERAGE_TOKEN }}
+          files: coverage/lcov.info
+
+  sonarqube:
+    name: SonarQube Analysis
+    runs-on: ubuntu-latest
+    if: github.actor != 'dependabot[bot]'
+    steps:
+      - name: Check for SonarQube token
+        id: check-sonar
+        run: |
+          if [ -z "${{ secrets.SONAR_TOKEN }}" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+          fi
+
+      - uses: actions/checkout@v6
+        if: steps.check-sonar.outputs.skip != 'true'
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v6
+        if: steps.check-sonar.outputs.skip != 'true'
+        with:
+          node-version: 24
+          cache: 'npm'
+
+      - name: Install dependencies
+        if: steps.check-sonar.outputs.skip != 'true'
+        run: npm ci --ignore-scripts
+
+      - name: Run tests with coverage
+        if: steps.check-sonar.outputs.skip != 'true'
+        run: npm run test:ci
+
+      - name: SonarQube Scan
+        if: steps.check-sonar.outputs.skip != 'true'
+        uses: SonarSource/sonarqube-scan-action@v7
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
