@@ -44,5 +44,10 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vitest": "^4.1.0"
+  },
+  "overrides": {
+    "@codecov/bundler-plugin-core": {
+      "undici": "^7.24.1"
+    }
   }
 }
