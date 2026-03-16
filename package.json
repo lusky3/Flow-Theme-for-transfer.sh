@@ -1,6 +1,6 @@
 {
   "name": "transfer.sh-web",
-  "version": "2.2.4",
+  "version": "2.3.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -24,7 +24,7 @@
     "dompurify": "^3.3.3",
     "lucide-react": "^0.577.0",
     "prism-react-renderer": "^2.4.1",
-    "react": "^19.2.3",
+    "react": "^19.2.4",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
@@ -38,8 +38,8 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.2.0",
     "@vitest/coverage-v8": "^4.1.0",
-    "jsdom": "^28.1.0",
-    "oxlint": "^1.55.0",
+    "jsdom": "^29.0.0",
+    "oxlint": "^1.56.0",
     "playwright": "^1.58.2",
     "prettier": "^3.8.1",
     "tailwindcss": "^4.2.1",
@@ -49,7 +49,7 @@
   },
   "overrides": {
     "@codecov/bundler-plugin-core": {
-      "undici": "^7.24.1"
+      "undici": "^7.24.4"
     }
   }
 }

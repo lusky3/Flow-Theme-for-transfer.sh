@@ -1,11 +1,11 @@
-# transfer.sh-web
+# Flow Theme for transfer.sh (a fork of transfer.sh-web)
 
-[![CI](https://github.com/lusky3/transfer.sh-web/actions/workflows/ci.yml/badge.svg)](https://github.com/lusky3/transfer.sh-web/actions/workflows/ci.yml)
-[![Release](https://github.com/lusky3/transfer.sh-web/actions/workflows/release.yml/badge.svg)](https://github.com/lusky3/transfer.sh-web/actions/workflows/release.yml)
-[![GitHub release](https://img.shields.io/github/v/release/lusky3/transfer.sh-web)](https://github.com/lusky3/transfer.sh-web/releases)
+[![CI](https://github.com/lusky3/Flow-Theme-for-transfer.sh/actions/workflows/ci.yml/badge.svg)](https://github.com/lusky3/Flow-Theme-for-transfer.sh/actions/workflows/ci.yml)
+[![Release](https://github.com/lusky3/Flow-Theme-for-transfer.sh/actions/workflows/release.yml/badge.svg)](https://github.com/lusky3/Flow-Theme-for-transfer.sh/actions/workflows/release.yml)
+[![GitHub release](https://img.shields.io/github/v/release/lusky3/Flow-Theme-for-transfer.sh)](https://github.com/lusky3/Flow-Theme-for-transfer.sh/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org/)
-[![GitHub stars](https://img.shields.io/github/stars/lusky3/transfer.sh-web)](https://github.com/lusky3/transfer.sh-web/stargazers)
+[![GitHub stars](https://img.shields.io/github/stars/lusky3/Flow-Theme-for-transfer.sh)](https://github.com/lusky3/Flow-Theme-for-transfer.sh/stargazers)
 
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lusky3_transfer.sh-web&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=lusky3_transfer.sh-web)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=lusky3_transfer.sh-web&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=lusky3_transfer.sh-web)
@@ -17,9 +17,9 @@
 
 Modern web frontend for [transfer.sh](https://github.com/dutchcoders/transfer.sh/) - easy file sharing from the command line.
 
-**🌐 [View Live Demo - Flow Theme](https://lusky3.github.io/transfer.sh-web/)**
+**🌐 [View Live Demo - Flow Theme](https://lusky3.github.io/Flow-Theme-for-transfer.sh/)**
 
-> **Flow** is the modern, beautiful GitHub Pages theme included with this project. See `docs/` for the showcase site.
+> **Flow** is also the name of the modern, beautiful GitHub Pages theme included with this project. See `docs/` for the showcase site.
 
 ## Screenshots
 
