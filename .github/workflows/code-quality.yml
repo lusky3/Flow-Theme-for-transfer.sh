@@ -122,6 +122,6 @@ jobs:
 
       - name: SonarQube Scan
         if: steps.check-sonar.outputs.skip != 'true'
-        uses: SonarSource/sonarqube-scan-action@v7
+        uses: SonarSource/sonarqube-scan-action@v8
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
