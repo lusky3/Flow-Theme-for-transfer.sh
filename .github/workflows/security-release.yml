@@ -28,7 +28,7 @@ jobs:
             echo "Security update detected: ${{ steps.metadata.outputs.alert-state }}"
           fi
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         if: steps.check-security.outputs.is_security == 'true'
         with:
           fetch-depth: 0
