@@ -22,7 +22,7 @@ jobs:
             echo "skip=true" >> $GITHUB_OUTPUT
           fi
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         if: steps.check-codecov.outputs.skip != 'true'
 
       - uses: actions/setup-node@v6
@@ -65,7 +65,7 @@ jobs:
             echo "skip=true" >> $GITHUB_OUTPUT
           fi
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         if: steps.check-qlty.outputs.skip != 'true'
 
       - uses: actions/setup-node@v6
@@ -101,7 +101,7 @@ jobs:
             echo "skip=true" >> $GITHUB_OUTPUT
           fi
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         if: steps.check-sonar.outputs.skip != 'true'
         with:
           fetch-depth: 0
