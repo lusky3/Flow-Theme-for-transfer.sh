@@ -200,8 +200,7 @@ describe('UploadZone', () => {
 
   it('shows upload progress', async () => {
     let progressCallback:
-      | ((e: { lengthComputable: boolean; loaded: number; total: number }) => void)
-      | null = null;
+      ((e: { lengthComputable: boolean; loaded: number; total: number }) => void) | null = null;
 
     class MockXHR {
       open = vi.fn();

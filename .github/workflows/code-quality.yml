@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v7
         if: steps.check-codecov.outputs.skip != 'true'
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         if: steps.check-codecov.outputs.skip != 'true'
         with:
           node-version: 24
@@ -68,7 +68,7 @@ jobs:
       - uses: actions/checkout@v7
         if: steps.check-qlty.outputs.skip != 'true'
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         if: steps.check-qlty.outputs.skip != 'true'
         with:
           node-version: 24
@@ -106,7 +106,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         if: steps.check-sonar.outputs.skip != 'true'
         with:
           node-version: 24
