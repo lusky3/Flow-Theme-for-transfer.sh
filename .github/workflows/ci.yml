@@ -16,7 +16,7 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Setup Node.js
         uses: actions/setup-node@v7
@@ -43,14 +43,14 @@ jobs:
         run: npm run build
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: dist
           path: dist/
           retention-days: 7
 
       - name: Upload coverage artifacts
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: coverage
           path: coverage/
@@ -63,16 +63,16 @@ jobs:
     permissions:
       contents: read
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Download dist
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: dist
           path: dist/
 
       - name: Setup Go
-        uses: actions/setup-go@v6
+        uses: actions/setup-go@v7
         with:
           go-version: '1.25.5'
 

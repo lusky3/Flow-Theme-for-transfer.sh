@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Dependabot metadata
         id: metadata
-        uses: dependabot/fetch-metadata@v2
+        uses: dependabot/fetch-metadata@v3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -28,7 +28,7 @@ jobs:
             echo "Security update detected: ${{ steps.metadata.outputs.alert-state }}"
           fi
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         if: steps.check-security.outputs.is_security == 'true'
         with:
           fetch-depth: 0
