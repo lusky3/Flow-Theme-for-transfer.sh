@@ -48,8 +48,6 @@
     "vitest": "^4.1.9"
   },
   "overrides": {
-    "@codecov/bundler-plugin-core": {
-      "undici": "^7.24.4"
-    }
+    "undici": "7.29.0"
   }
 }
