@@ -101,4 +101,40 @@ describe('useFetchContent', () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
+  it('ignores a successful response that arrives after unmount', async () => {
+    let resolveText: (v: string) => void = () => {};
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() =>
+        Promise.resolve({
+          ok: true,
+          text: () => new Promise<string>((r) => (resolveText = r)),
+        })
+      )
+    );
+
+    const { result, unmount } = renderHook(() => useFetchContent('https://example.com/a.txt'));
+    unmount();
+    resolveText('late content');
+    await Promise.resolve();
+
+    expect(result.current.loading).toBe(true);
+    expect(result.current.data).toBe(null);
+  });
+
+  it('ignores a failed response that arrives after unmount', async () => {
+    let rejectFetch: (e: Error) => void = () => {};
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() => new Promise((_, reject) => (rejectFetch = reject)))
+    );
+
+    const { result, unmount } = renderHook(() => useFetchContent('https://example.com/a.txt'));
+    unmount();
+    rejectFetch(new Error('late failure'));
+    await Promise.resolve();
+
+    expect(result.current.loading).toBe(true);
+    expect(result.current.error).toBe(null);
+  });
 });
