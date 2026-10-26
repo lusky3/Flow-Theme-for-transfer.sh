@@ -9,6 +9,8 @@ function GitHubIcon({ className }: { readonly className?: string }) {
   );
 }
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export function Footer() {
   const config = getConfig();
 
@@ -17,7 +19,7 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            © {new Date().getFullYear()} {config.hostname}. Easy file sharing from the command line.
+            © {CURRENT_YEAR} {config.hostname}. Easy file sharing from the command line.
           </p>
 
           <div className="flex items-center gap-4">

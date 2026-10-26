@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import DOMPurify from 'dompurify';
 import { useFetchContent } from '../../hooks/useFetchContent';
 import { PreviewLoading, PreviewError, PreviewContainer } from './PreviewContainer';
@@ -61,13 +61,10 @@ function parseMarkdown(md: string): string {
 
 export function MarkdownPreview({ url }: MarkdownPreviewProps) {
   const { data: rawContent, loading, error } = useFetchContent(url);
-  const [content, setContent] = useState<string>('');
-
-  useEffect(() => {
-    if (rawContent) {
-      setContent(DOMPurify.sanitize(parseMarkdown(rawContent)));
-    }
-  }, [rawContent]);
+  const content = useMemo(
+    () => (rawContent ? DOMPurify.sanitize(parseMarkdown(rawContent)) : ''),
+    [rawContent]
+  );
 
   if (loading) return <PreviewLoading variant="bordered" />;
   if (error) return <PreviewError message={error} variant="bordered" />;
