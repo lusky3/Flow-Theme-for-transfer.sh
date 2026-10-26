@@ -102,7 +102,8 @@ describe('useFetchContent', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
   it('ignores a successful response that arrives after unmount', async () => {
-    let resolveText: (v: string) => void = () => {};
+    const noop = () => {};
+    let resolveText: (v: string) => void = noop;
     vi.stubGlobal(
       'fetch',
       vi.fn(() =>
@@ -114,9 +115,10 @@ describe('useFetchContent', () => {
     );
 
     const { result, unmount } = renderHook(() => useFetchContent('https://example.com/a.txt'));
+    await waitFor(() => expect(resolveText).not.toBe(noop));
     unmount();
     resolveText('late content');
-    await Promise.resolve();
+    await new Promise((r) => setTimeout(r, 0));
 
     expect(result.current.loading).toBe(true);
     expect(result.current.data).toBe(null);
@@ -132,7 +134,7 @@ describe('useFetchContent', () => {
     const { result, unmount } = renderHook(() => useFetchContent('https://example.com/a.txt'));
     unmount();
     rejectFetch(new Error('late failure'));
-    await Promise.resolve();
+    await new Promise((r) => setTimeout(r, 0));
 
     expect(result.current.loading).toBe(true);
     expect(result.current.error).toBe(null);
