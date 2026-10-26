@@ -63,7 +63,7 @@ export function MarkdownPreview({ url }: MarkdownPreviewProps) {
   const { data: rawContent, loading, error } = useFetchContent(url);
   const content = useMemo(
     () => (rawContent ? DOMPurify.sanitize(parseMarkdown(rawContent)) : ''),
-    [rawContent],
+    [rawContent]
   );
 
   if (loading) return <PreviewLoading variant="bordered" />;
