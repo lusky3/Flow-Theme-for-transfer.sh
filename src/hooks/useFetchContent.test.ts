@@ -102,22 +102,21 @@ describe('useFetchContent', () => {
     expect(fetchMock).toHaveBeenCalledTimes(2);
   });
   it('ignores a successful response that arrives after unmount', async () => {
-    const noop = () => {};
-    let resolveText: (v: string) => void = noop;
+    const resolver: { resolve: ((value: string) => void) | null } = { resolve: null };
     vi.stubGlobal(
       'fetch',
       vi.fn(() =>
         Promise.resolve({
           ok: true,
-          text: () => new Promise<string>((r) => (resolveText = r)),
+          text: () => new Promise<string>((r) => (resolver.resolve = r)),
         })
       )
     );
 
     const { result, unmount } = renderHook(() => useFetchContent('https://example.com/a.txt'));
-    await waitFor(() => expect(resolveText).not.toBe(noop));
+    await waitFor(() => expect(resolver.resolve).not.toBeNull());
     unmount();
-    resolveText('late content');
+    resolver.resolve?.('late content');
     await new Promise((r) => setTimeout(r, 0));
 
     expect(result.current.loading).toBe(true);
@@ -125,18 +124,29 @@ describe('useFetchContent', () => {
   });
 
   it('ignores a failed response that arrives after unmount', async () => {
-    let rejectFetch: (e: Error) => void = () => {};
+    const rejecter: { reject: ((reason: Error) => void) | null } = { reject: null };
     vi.stubGlobal(
       'fetch',
-      vi.fn(() => new Promise((_, reject) => (rejectFetch = reject)))
+      vi.fn(() => new Promise((_, reject) => (rejecter.reject = reject)))
     );
 
     const { result, unmount } = renderHook(() => useFetchContent('https://example.com/a.txt'));
     unmount();
-    rejectFetch(new Error('late failure'));
+    rejecter.reject?.(new Error('late failure'));
     await new Promise((r) => setTimeout(r, 0));
 
     expect(result.current.loading).toBe(true);
     expect(result.current.error).toBe(null);
+  });
+  it('stringifies non-Error rejections', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(() => Promise.reject('boom'))
+    );
+
+    const { result } = renderHook(() => useFetchContent('https://example.com/a.txt'));
+
+    await waitFor(() => expect(result.current.loading).toBe(false));
+    expect(result.current.error).toBe('boom');
   });
 });

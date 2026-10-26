@@ -26,8 +26,10 @@ export function useFetchContent(url: string): FetchState<string> {
       .then((data) => {
         if (!cancelled) setSettled({ url, data, error: null });
       })
-      .catch((err) => {
-        if (!cancelled) setSettled({ url, data: null, error: err.message });
+      .catch((err: unknown) => {
+        if (!cancelled) {
+          setSettled({ url, data: null, error: err instanceof Error ? err.message : String(err) });
+        }
       });
 
     return () => {
