@@ -4,7 +4,7 @@
 [![Release](https://github.com/lusky3/Flow-Theme-for-transfer.sh/actions/workflows/release.yml/badge.svg)](https://github.com/lusky3/Flow-Theme-for-transfer.sh/actions/workflows/release.yml)
 [![GitHub release](https://img.shields.io/github/v/release/lusky3/Flow-Theme-for-transfer.sh)](https://github.com/lusky3/Flow-Theme-for-transfer.sh/releases)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/node-%5E22.22.2%20%7C%7C%20%5E24.15.0%20%7C%7C%20%3E%3D26-brightgreen)](https://nodejs.org/)
 [![GitHub stars](https://img.shields.io/github/stars/lusky3/Flow-Theme-for-transfer.sh)](https://github.com/lusky3/Flow-Theme-for-transfer.sh/stargazers)
 
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=lusky3_transfer.sh-web&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=lusky3_transfer.sh-web)

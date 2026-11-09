@@ -3,13 +3,16 @@
   "version": "1.0.0",
   "description": "GitHub Pages site for TransferFlow",
   "type": "module",
+  "engines": {
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
+  },
   "scripts": {
     "test": "node --test script.test.js",
     "serve": "python3 -m http.server 8000",
     "validate": "node validate.js"
   },
   "devDependencies": {
-    "jsdom": "^25.0.1"
+    "jsdom": "^31.0.0"
   },
   "keywords": [
     "transfer.sh",
